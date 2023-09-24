@@ -7,7 +7,7 @@
   ],
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "error"
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   "parserOptions": {
     "ecmaVersion": "latest",

@@ -25,7 +25,13 @@
 
   "customizations": {
     "vscode": {
-      "extensions": ["Orta.vscode-jest", "firsttris.vscode-jest-runner"]
+      "extensions": ["Orta.vscode-jest", "firsttris.vscode-jest-runner"],
+      "settings": {
+        "terminal.integrated.automationProfile.linux": {
+          "path": "zsh"
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
     }
   }
 

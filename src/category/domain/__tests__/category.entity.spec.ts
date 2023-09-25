@@ -222,7 +222,36 @@ describe('Category unit tests', () => {
     })
   })
 
-  //TODO - Test category_id
+  describe('update command', () => {
+    it('should update a category with name set', () => {
+      const category = Category.create({
+        name: 'Movie'
+      })
+
+      category.update({
+        name: 'Show'
+      })
+
+      expect(category.name).toBe('Show')
+      expect(validateSpy).toBeCalledTimes(2)
+    })
+
+    it('should update a category with name and description set', () => {
+      const category = Category.create({
+        name: 'Show'
+      })
+
+      category.update({
+        name: 'Movie',
+        description: 'Movie category description'
+      })
+
+      expect(category.name).toBe('Movie')
+      expect(category.description).toBe('Movie category description')
+      expect(validateSpy).toBeCalledTimes(2)
+    })
+  })
+
   describe('category_id field', () => {
     const arrange = [
       { category_id: null },

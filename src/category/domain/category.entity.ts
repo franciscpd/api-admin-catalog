@@ -15,11 +15,15 @@ export type CategoryConstructorProps = {
   updated_at?: Date
 }
 
-export type CategoryCreateCommand = {
-  name: string
-  description?: string
-  is_active?: boolean
-}
+export type CategoryCreateCommand = Pick<
+  CategoryConstructorProps,
+  'name' | 'description' | 'is_active'
+>
+
+export type CategoryUpdateCommand = Pick<
+  CategoryConstructorProps,
+  'name' | 'description'
+>
 
 export class Category implements Entity {
   category_id: Uuid
@@ -57,6 +61,13 @@ export class Category implements Entity {
   }
 
   changeDescription(description: string): void {
+    this.description = description
+
+    Category.validate(this)
+  }
+
+  update({ name, description }: CategoryUpdateCommand): void {
+    this.name = name
     this.description = description
 
     Category.validate(this)

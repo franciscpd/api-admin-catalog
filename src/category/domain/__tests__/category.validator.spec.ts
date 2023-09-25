@@ -53,4 +53,45 @@ describe('Category validator', () => {
       })
     })
   })
+
+  describe('update command', () => {
+    it('should throw an error if name is not provided', () => {
+      expect(() =>
+        Category.create({ name: 'a' }).update({ name: null })
+      ).containsErrorMessage({
+        name: [
+          'name must be shorter than or equal to 255 characters',
+          'name must be a string',
+          'name should not be empty'
+        ]
+      })
+    })
+
+    it('should throw an error if name is longer than 255 characters', () => {
+      expect(() =>
+        Category.create({ name: 'a' }).update({ name: 'a'.repeat(256) })
+      ).containsErrorMessage({
+        name: ['name must be shorter than or equal to 255 characters']
+      })
+    })
+
+    it('should throw an error if name is not a string', () => {
+      expect(() =>
+        Category.create({ name: 'a' }).update({ name: 1 } as any)
+      ).containsErrorMessage({
+        name: [
+          'name must be shorter than or equal to 255 characters',
+          'name must be a string'
+        ]
+      })
+    })
+
+    it('should throw an error if description is not a string', () => {
+      expect(() =>
+        Category.create({ name: 'a' }).update({ description: 1 } as any)
+      ).containsErrorMessage({
+        description: ['description must be a string']
+      })
+    })
+  })
 })
